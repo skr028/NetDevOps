@@ -1,6 +1,7 @@
 module "ec2" {  
-  source         = "./infra/ec2"
-  instanceType   = "t3.medium"
+  source              = "./infra/ec2"
+  instanceType        = "t3.medium"
+  depends_on = [ module.vpc ]
 }
 
 
