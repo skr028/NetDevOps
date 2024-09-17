@@ -72,8 +72,8 @@ jobs:
     - name : Configure AWS credentials
       uses : aws-actions/configure-aws-credentials@v4
       with :
-        role-to-assume: arn:aws:iam::${{env.AWS_ACCOUNT}}:role/NetOpsGitActionRole
-        aws-region    : ${{env.AWS_REGION}}
+        role-to-assume: arn:aws:iam::${{vars.AWS_ACCOUNT}}:role/NetOpsGitActionRole
+        aws-region    : ${{vars.AWS_REGION}}
 
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
