@@ -21,14 +21,13 @@ resource "aws_internet_gateway" "tfpoc_igw" {
 }
 
 resource "aws_subnet" "tfpoc_public_subnet" {
-  vpc_id = aws_vpc.tfpoc.id
-  cidr_block = var.publicSubnet_cidr[count.index]
-  #availability_zone = var.AZ[0]
-  availability_zone = data.aws_availability_zones.available.names[count.index]
-  count = 2
+  vpc_id                = aws_vpc.tfpoc.id
+  cidr_block            = var.publicSubnet_cidr[count.index]
+  availability_zone     = data.aws_availability_zones.available.names[count.index]
+  count                 = 2
 
    tags = {
-    Name = "tfpoc_public_subnet.${count.index}"
+    Name                = "tfpoc_public_subnet.${count.index}"
   }
   
 }
