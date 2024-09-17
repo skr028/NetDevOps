@@ -12,7 +12,7 @@ resource "aws_instance" "tfpoc_instance" {
   ami                    = data.aws_ami.app_ami.id
   instance_type          = var.instanceType
   # subnet_id     = aws_subnet.tfpoc_public_subnet.id
-  subnet_id              = var.public_subnet_ids
+  subnet_id              = var.public_subnet_id
   
   vpc_security_group_ids = [var.security_group_id]
 

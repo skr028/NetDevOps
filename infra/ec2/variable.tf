@@ -3,9 +3,8 @@ variable "instanceType" {
   default = "t2.micro"
 }
 
-variable "public_subnet_ids" {
-  type = list
-  default = []
+variable "public_subnet_id" {
+  type = string
 }
 
 variable "security_group_id" {  
