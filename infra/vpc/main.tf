@@ -24,6 +24,7 @@ resource "aws_subnet" "tfpoc_public_subnet" {
   vpc_id                = aws_vpc.tfpoc.id
   cidr_block            = var.publicSubnet_cidr[count.index]
   availability_zone     = data.aws_availability_zones.available.names[count.index]
+  map_public_ip_on_launch = true
   count                 = 2
 
    tags = {
