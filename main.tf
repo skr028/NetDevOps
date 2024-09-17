@@ -1,6 +1,8 @@
 module "ec2" {  
   source              = "./infra/ec2"
   instanceType        = "t3.medium"
+  public_subnet_ids   = module.vpc.public_subnet_ids[0]
+  security_group_id   = module.vpc.security_group_id
 }
 
 

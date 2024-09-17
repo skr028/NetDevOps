@@ -12,9 +12,9 @@ resource "aws_instance" "tfpoc_instance" {
   ami                    = data.aws_ami.app_ami.id
   instance_type          = var.instanceType
   # subnet_id     = aws_subnet.tfpoc_public_subnet.id
-  subnet_id              = module.vpc.public_subnet_ids[0]
+  subnet_id              = var.public_subnet_ids
   
-  vpc_security_group_ids = [module.vpc.security_group_id]
+  vpc_security_group_ids = [var.security_group_id]
 
   user_data = templatefile("${path.module}/user_data.sh", {})
 
