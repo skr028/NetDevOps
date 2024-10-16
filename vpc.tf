@@ -1,15 +1,7 @@
-locals {
-  region_providers = {
-    "us-east-1"       = aws.us-east-1
-    "ap-south-1"      = aws.ap-south-1
-    "ap-southeast-2"  = aws.ap-southeast-2
-  }
-}
-
 # Create VPCs
 module "vpc_us_east_1_dev" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 5.0"
 
   providers = {
     aws = aws.us-east-1
@@ -33,7 +25,7 @@ module "vpc_us_east_1_dev" {
 
 module "vpc_us_east_1_prod" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 5.0"
 
   providers = {
     aws = aws.us-east-1
@@ -57,7 +49,7 @@ module "vpc_us_east_1_prod" {
 
 module "vpc_ap_south_1_dev" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 5.0"
 
   providers = {
     aws = aws.ap-south-1
@@ -81,7 +73,7 @@ module "vpc_ap_south_1_dev" {
 
 module "vpc_ap_south_1_prod" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 5.0"
 
   providers = {
     aws = aws.ap-south-1
@@ -105,7 +97,7 @@ module "vpc_ap_south_1_prod" {
 
 module "vpc_ap_southeast_2_shared" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 5.0"
 
   providers = {
     aws = aws.ap-southeast-2
