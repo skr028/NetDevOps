@@ -160,7 +160,7 @@ resource "aws_security_group" "allow_ssh" {
     Name = "allow_ssh_${each.key}"
   }
 
-  provider = local.region_providers[each.value.region]
+  # provider = local.region_providers[each.value.region]
   
 }
 
@@ -180,7 +180,7 @@ resource "aws_instance" "web_server" {
 
   vpc_security_group_ids = [aws_security_group.allow_ssh[each.key].id]
 
-  provider = local.region_providers[each.value.region]
+  # provider = local.region_providers[each.value.region]
 
 }
 
@@ -202,5 +202,5 @@ data "aws_ami" "amazon_linux_2" {
     values = ["amzn2-ami-hvm-*-x86_64-gp2"]
   }
 
-  provider = local.region_providers[each.value]
+  # provider = local.region_providers[each.value]
 }
