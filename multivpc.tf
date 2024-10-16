@@ -294,7 +294,7 @@ resource "aws_instance" "ec2_instances" {
     london_net  = { provider = aws.london, subnet = aws_subnet.london_net.id, sg = aws_security_group.allow_ssh["london_net"].id }
   }
 
-  provider      = each.value.provider
+#   provider      = each.value.provider
   ami           = data.aws_ami.amazon_linux_2[split("_", each.key)[0]].id
   instance_type = "t2.micro"
   subnet_id     = each.value.subnet
