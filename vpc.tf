@@ -1,3 +1,11 @@
+locals {
+  region_providers = {
+    "us-east-1"       = aws.us-east-1
+    "ap-south-1"      = aws.ap-south-1
+    "ap-southeast-2"  = aws.ap-southeast-2
+  }
+}
+
 # Create VPCs
 module "vpc_us_east_1_dev" {
   source  = "terraform-aws-modules/vpc/aws"
@@ -152,9 +160,8 @@ resource "aws_security_group" "allow_ssh" {
     Name = "allow_ssh_${each.key}"
   }
 
-  provider = each.key == "ap-southeast-2" ? aws.ap-southeast-2 : (
-    contains(["ap-south-1-dev", "ap-south-1-prod"], each.key) ? aws.ap-south-1 : aws.us-east-1
-  )
+  provider = local.region_providers[each.value.region]
+  
 }
 
 # Create EC2 instances with Apache
@@ -173,9 +180,8 @@ resource "aws_instance" "web_server" {
 
   vpc_security_group_ids = [aws_security_group.allow_ssh[each.key].id]
 
-  provider = each.key == "ap-southeast-2" ? aws.ap-southeast-2 : (
-    contains(["ap-south-1-dev", "ap-south-1-prod"], each.key) ? aws.ap-south-1 : aws.us-east-1
-  )
+  provider = local.region_providers[each.value.region]
+
 }
 
 # Data source for Amazon Linux 2 AMI
@@ -196,7 +202,5 @@ data "aws_ami" "amazon_linux_2" {
     values = ["amzn2-ami-hvm-*-x86_64-gp2"]
   }
 
-  provider = each.key == "ap-southeast-2" ? aws.ap-southeast-2 : (
-    contains(["ap-south-1-dev", "ap-south-1-prod"], each.key) ? aws.ap-south-1 : aws.us-east-1
-  )
+  provider = local.region_providers[each.value]
 }
