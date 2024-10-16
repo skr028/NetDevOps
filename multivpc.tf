@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "~> 5.0"
+     }
+  }
+}
+
 # Provider configuration
 provider "aws" {
   alias  = "mumbai"
@@ -300,9 +309,9 @@ resource "aws_security_group" "allow_ssh" {
     Name = "Allow-SSH-${each.key}"
   }
 
-  provider = each.key == "london_net" ? aws.london : (
-    contains(["sydney_dev", "sydney_prod"], each.key) ? aws.sydney : aws.mumbai
-  )
+#   provider = each.key == "london_net" ? aws.london : (
+#     contains(["sydney_dev", "sydney_prod"], each.key) ? aws.sydney : aws.mumbai
+#   )
 }
 
 # EC2 Instances
@@ -317,9 +326,9 @@ data "aws_ami" "amazon_linux_2" {
     values = ["amzn2-ami-hvm-*-x86_64-gp2"]
   }
 
-  provider = each.key == "london" ? aws.london : (
-    each.key == "sydney" ? aws.sydney : aws.mumbai
-  )
+#   provider = each.key == "london" ? aws.london : (
+#     each.key == "sydney" ? aws.sydney : aws.mumbai
+#   )
 }
 
 resource "aws_instance" "ec2_instances" {
