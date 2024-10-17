@@ -1,16 +1,17 @@
 # Security Groups
 resource "aws_security_group" "allow_ssh" {
   for_each = {
-    mumbai_dev  = aws_vpc.mumbai_dev.id
-    mumbai_prod = aws_vpc.mumbai_prod.id
-    sydney_dev  = aws_vpc.sydney_dev.id
-    sydney_prod = aws_vpc.sydney_prod.id
-    london_net  = aws_vpc.london_net.id
+    mumbai_dev  = {provider=ap-south-1,vpcId= aws_vpc.mumbai_dev.id}
+    mumbai_prod = {provider=ap-south-1,vpcId=aws_vpc.mumbai_prod.id}
+    sydney_dev  = {provider=ap-southeast-2,vpcId=aws_vpc.sydney_dev.id}
+    sydney_prod = {provider=ap-southeast-2,vpcId=aws_vpc.sydney_prod.id}
+    london_net  = {provider=eu-west-2,vpcId=aws_vpc.london_net.id}
   }
 
   name        = "allow_ssh_${each.key}"
   description = "Allow SSH inbound traffic"
-  vpc_id      = each.value
+  vpc_id      = each.value.vpcId
+  provider    = each.value.provider
 
   ingress {
     description = "SSH from anywhere"
@@ -30,6 +31,8 @@ resource "aws_security_group" "allow_ssh" {
   tags = {
     Name = "Allow-SSH-${each.key}"
   }
+
+  
 
 }
 
