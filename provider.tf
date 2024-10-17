@@ -9,16 +9,17 @@ terraform {
 
 # Provider configuration
 provider "aws" {
-  alias  = "mumbai"
   region = "ap-south-1"
+  alias  = "mumbai"
+  
 }
 
 provider "aws" {
-  alias  = "sydney"
   region = "ap-southeast-2"
+  alias  = "sydney"
 }
 
 provider "aws" {
-  alias  = "london"
   region = "eu-west-2"
+  alias  = "london"  
 }
