@@ -55,14 +55,19 @@ data "aws_ami" "amazon_linux_2" {
 
 resource "aws_instance" "ec2_instances" {
   for_each = {
-    mumbai_dev  = { provider = aws.mumbai, subnet = aws_subnet.mumbai_dev.id, sg = aws_security_group.allow_ssh["mumbai_dev"].id }
-    mumbai_prod = { provider = aws.mumbai, subnet = aws_subnet.mumbai_prod.id, sg = aws_security_group.allow_ssh["mumbai_prod"].id }
-    sydney_dev  = { provider = aws.sydney, subnet = aws_subnet.sydney_dev.id, sg = aws_security_group.allow_ssh["sydney_dev"].id }
-    sydney_prod = { provider = aws.sydney, subnet = aws_subnet.sydney_prod.id, sg = aws_security_group.allow_ssh["sydney_prod"].id }
-    london_net  = { provider = aws.london, subnet = aws_subnet.london_net.id, sg = aws_security_group.allow_ssh["london_net"].id }
+    # mumbai_dev  = { provider = aws.mumbai, subnet = aws_subnet.mumbai_dev.id, sg = aws_security_group.allow_ssh["mumbai_dev"].id }
+    # mumbai_prod = { provider = aws.mumbai, subnet = aws_subnet.mumbai_prod.id, sg = aws_security_group.allow_ssh["mumbai_prod"].id }
+    # sydney_dev  = { provider = aws.sydney, subnet = aws_subnet.sydney_dev.id, sg = aws_security_group.allow_ssh["sydney_dev"].id }
+    # sydney_prod = { provider = aws.sydney, subnet = aws_subnet.sydney_prod.id, sg = aws_security_group.allow_ssh["sydney_prod"].id }
+    # london_net  = { provider = aws.london, subnet = aws_subnet.london_net.id, sg = aws_security_group.allow_ssh["london_net"].id }
+    mumbai_dev  = { subnet = aws_subnet.mumbai_dev.id, sg = aws_security_group.allow_ssh["mumbai_dev"].id }
+    mumbai_prod = { subnet = aws_subnet.mumbai_prod.id, sg = aws_security_group.allow_ssh["mumbai_prod"].id }
+    sydney_dev  = { subnet = aws_subnet.sydney_dev.id, sg = aws_security_group.allow_ssh["sydney_dev"].id }
+    sydney_prod = { subnet = aws_subnet.sydney_prod.id, sg = aws_security_group.allow_ssh["sydney_prod"].id }
+    london_net  = { subnet = aws_subnet.london_net.id, sg = aws_security_group.allow_ssh["london_net"].id }
   }
 
-  provider      = each.value.provider
+#   provider      = each.value.provider
   ami           = data.aws_ami.amazon_linux_2[split("_", each.key)[0]].id
   instance_type = "t2.micro"
   subnet_id     = each.value.subnet
