@@ -11,7 +11,7 @@ resource "aws_security_group" "allow_ssh" {
   name        = "allow_ssh_${each.key}"
   description = "Allow SSH inbound traffic"
   vpc_id      = each.value.vpcId
-  provider    = each.value.provider
+  provider    = aws.mumbai
 
   ingress {
     description = "SSH from anywhere"
