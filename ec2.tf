@@ -1,11 +1,11 @@
 # Security Groups
 resource "aws_security_group" "allow_ssh" {
   for_each = {
-    mumbai_dev  = {provider="aws.mumbai",vpcId=aws_vpc.mumbai_dev.id}
-    mumbai_prod = {provider="aws.mumbai",vpcId=aws_vpc.mumbai_prod.id}
-    sydney_dev  = {provider="aws.sydney",vpcId=aws_vpc.sydney_dev.id}
-    sydney_prod = {provider="aws.sydney",vpcId=aws_vpc.sydney_prod.id}
-    london_net  = {provider="aws.london",vpcId=aws_vpc.london_net.id}
+    mumbai_dev  = {provider=mumbai,vpcId=aws_vpc.mumbai_dev.id}
+    mumbai_prod = {provider=mumbai,vpcId=aws_vpc.mumbai_prod.id}
+    sydney_dev  = {provider=sydney,vpcId=aws_vpc.sydney_dev.id}
+    sydney_prod = {provider=sydney,vpcId=aws_vpc.sydney_prod.id}
+    london_net  = {provider=london,vpcId=aws_vpc.london_net.id}
   }
 
   name        = "allow_ssh_${each.key}"
