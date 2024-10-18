@@ -1,11 +1,24 @@
+provider "aws" {
+    alias  = "mumbai"
+    region = "ap-south-1"
+} 
+provider "aws" {
+    alias  = "sydney"
+    region = "ap-southeast-2"
+  }
+provider "aws" {
+    alias  = "london"
+    region = "eu-west-2"
+  }
+
 # Security Groups
 resource "aws_security_group" "allow_ssh" {
   for_each = {
-    mumbai_dev  = {pro=aws.mumbai,vpcId=aws_vpc.mumbai_dev.id}
-    mumbai_prod = {pro=aws.mumbai,vpcId=aws_vpc.mumbai_prod.id}
-    sydney_dev  = {pro=aws.sydney,vpcId=aws_vpc.sydney_dev.id}
-    sydney_prod = {pro=aws.sydney,vpcId=aws_vpc.sydney_prod.id}
-    london_net  = {pro=aws.london,vpcId=aws_vpc.london_net.id}
+    mumbai_dev  = {vpcId=aws_vpc.mumbai_dev.id,pro=aws.mumbai,}
+    mumbai_prod = {vpcId=aws_vpc.mumbai_prod.id,pro=aws.mumbai}
+    sydney_dev  = {vpcId=aws_vpc.sydney_dev.id,pro=aws.sydney}
+    sydney_prod = {vpcId=aws_vpc.sydney_prod.id,pro=aws.sydney}
+    london_net  = {vpcId=aws_vpc.london_net.id,pro=aws.london}
   }
 
   name        = "allow_ssh_${each.key}"
