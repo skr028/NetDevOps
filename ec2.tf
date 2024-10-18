@@ -11,7 +11,7 @@ resource "aws_security_group" "allow_ssh" {
   name        = "allow_ssh_${each.key}"
   description = "Allow SSH inbound traffic"
   vpc_id      = each.value.vpcId
-  provider    = each.value.provider
+  provider    = "aws.${each.value.provider}"
 
   ingress {
     description = "SSH from anywhere"
@@ -31,8 +31,6 @@ resource "aws_security_group" "allow_ssh" {
   tags = {
     Name = "Allow-SSH-${each.key}"
   }
-
-  
 
 }
 

@@ -7,7 +7,6 @@ terraform {
      }
   }
 
-
   backend "s3" {
 
     bucket      = "test12341985"
