@@ -1,25 +1,15 @@
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-      version = "~> 5.0"
-     }
-  }
-}
-
 # Provider configuration
 provider "aws" {
-  region = "ap-south-1"
   alias  = "mumbai"
-  
+  region = "ap-south-1"  
 }
 
 provider "aws" {
-  region = "ap-southeast-2"
   alias  = "sydney"
+  region = "ap-southeast-2"
 }
 
 provider "aws" {
-  region = "eu-west-2"
-  alias  = "london"  
+  alias  = "london"
+  region = "eu-west-2" 
 }
